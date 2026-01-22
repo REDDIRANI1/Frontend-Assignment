@@ -7,11 +7,16 @@ export const DraggableNode = ({ type, label }) => {
       event.dataTransfer.effectAllowed = 'move';
     };
 
+    const onDragEnd = (event) => {
+      event.preventDefault();
+    };
+
     return (
       <div
         className="draggable-node"
         onDragStart={(event) => onDragStart(event, type)}
-        draggable
+        onDragEnd={onDragEnd}
+        draggable={true}
       >
           <span>{label}</span>
       </div>

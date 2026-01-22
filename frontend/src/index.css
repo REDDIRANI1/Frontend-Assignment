@@ -108,6 +108,8 @@ button {
   transition: all 0.2s ease;
   box-shadow: var(--shadow-sm);
   user-select: none;
+  -webkit-user-drag: element;
+  touch-action: none;
 }
 
 .draggable-node:hover {
@@ -119,6 +121,10 @@ button {
 .draggable-node:active {
   cursor: grabbing;
   transform: translateY(0);
+}
+
+.draggable-node span {
+  pointer-events: none;
 }
 
 .canvas-container {
