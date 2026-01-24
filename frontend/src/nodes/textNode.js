@@ -6,6 +6,7 @@ import { extractVariables } from '../variableUtils';
 
 export const TextNode = ({ id, data }) => {
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
+  const [variables, setVariables] = useState([]);
   const textareaRef = useRef(null);
 
   const resizeTextarea = () => {
@@ -18,8 +19,9 @@ export const TextNode = ({ id, data }) => {
   useEffect(() => {
     resizeTextarea();
 
-    const variables = extractVariables(currText);
-    console.log(`[TextNode ${id}] Detected variables:`, variables);
+    const extractedVariables = extractVariables(currText);
+    setVariables(extractedVariables);
+    console.log(`[TextNode ${id}] Detected variables:`, extractedVariables);
   }, [currText, id]);
 
   const handleTextChange = (e) => {
@@ -27,12 +29,17 @@ export const TextNode = ({ id, data }) => {
     resizeTextarea();
   };
 
+  const inputs = variables.map((variable, index) => ({
+    id: variable,
+    style: { top: `${(index + 1) * 100 / (variables.length + 1)}%` }
+  }));
+
   const outputs = [
     { id: 'output' }
   ];
 
   return (
-    <BaseNode id={id} title="Text" outputs={outputs}>
+    <BaseNode id={id} title="Text" inputs={inputs} outputs={outputs}>
       <label>
         Text:
         <textarea
