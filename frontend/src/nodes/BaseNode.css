@@ -1,4 +1,5 @@
 .base-node {
+  position: relative;
   width: 280px;
   min-height: 80px;
   border: 1px solid #d1d5db;

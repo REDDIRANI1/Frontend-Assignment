@@ -3,11 +3,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { BaseNode } from './BaseNode';
 import { extractVariables } from '../variableUtils';
+import { useStore } from '../store';
 
 export const TextNode = ({ id, data }) => {
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
   const [variables, setVariables] = useState([]);
   const textareaRef = useRef(null);
+  const updateNodeField = useStore((state) => state.updateNodeField);
 
   const resizeTextarea = () => {
     if (textareaRef.current) {
@@ -26,6 +28,7 @@ export const TextNode = ({ id, data }) => {
 
   const handleTextChange = (e) => {
     setCurrText(e.target.value);
+    updateNodeField(id, 'text', e.target.value);
     resizeTextarea();
   };
 
