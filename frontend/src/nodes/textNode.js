@@ -11,15 +11,14 @@ export const TextNode = ({ id, data }) => {
   };
 
   const outputs = [
-    { id: 'output' }
+    { id: `${id}-output` }
   ];
 
   return (
     <BaseNode id={id} title="Text" outputs={outputs}>
       <label>
         Text:
-        <input
-          type="text"
+        <textarea
           value={currText}
           onChange={handleTextChange}
         />
