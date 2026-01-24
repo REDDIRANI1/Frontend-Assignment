@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { BaseNode } from './BaseNode';
+import { extractVariables } from '../variableUtils';
 
 export const TextNode = ({ id, data }) => {
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
@@ -16,7 +17,10 @@ export const TextNode = ({ id, data }) => {
 
   useEffect(() => {
     resizeTextarea();
-  }, [currText]);
+
+    const variables = extractVariables(currText);
+    console.log(`[TextNode ${id}] Detected variables:`, variables);
+  }, [currText, id]);
 
   const handleTextChange = (e) => {
     setCurrText(e.target.value);
