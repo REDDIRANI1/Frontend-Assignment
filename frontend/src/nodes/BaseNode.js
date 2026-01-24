@@ -1,9 +1,9 @@
 import { Handle, Position } from 'reactflow';
 import './BaseNode.css';
 
-export const BaseNode = ({ id, title, inputs = [], outputs = [], children }) => {
+export const BaseNode = ({ id, title, inputs = [], outputs = [], children, style = {} }) => {
   return (
-    <div className="base-node">
+    <div className="base-node" style={style}>
       {inputs.map((input, index) => (
         <Handle
           key={`input-${index}`}
