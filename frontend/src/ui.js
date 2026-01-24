@@ -57,6 +57,9 @@ export const PipelineUI = () => {
 
     const getInitNodeData = (nodeID, type) => {
       let nodeData = { id: nodeID, nodeType: `${type}` };
+      if (type === 'text') {
+        nodeData.text = '{{input}}';
+      }
       return nodeData;
     }
 
