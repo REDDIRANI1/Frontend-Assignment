@@ -24,7 +24,7 @@ export const TextNode = ({ id, data }) => {
   };
 
   const outputs = [
-    { id: `${id}-output` }
+    { id: 'output' }
   ];
 
   return (
