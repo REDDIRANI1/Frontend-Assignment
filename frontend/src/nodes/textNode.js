@@ -1,6 +1,7 @@
 // textNode.js
 
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { useUpdateNodeInternals } from 'reactflow';
 import { BaseNode } from './BaseNode';
 import { extractVariables } from '../variableUtils';
 import { useStore } from '../store';
@@ -12,6 +13,7 @@ export const TextNode = ({ id, data }) => {
   const textareaRef = useRef(null);
   const canvasRef = useRef(null);
   const updateNodeField = useStore((state) => state.updateNodeField);
+  const updateNodeInternals = useUpdateNodeInternals();
 
   const calculateWidth = (text) => {
     if (!canvasRef.current) {
@@ -58,7 +60,9 @@ export const TextNode = ({ id, data }) => {
     const extractedVariables = extractVariables(currText);
     setVariables(extractedVariables);
     console.log(`[TextNode ${id}] Detected variables:`, extractedVariables);
-  }, [currText, id, updateNodeSize]);
+
+    updateNodeInternals(id);
+  }, [currText, id, updateNodeSize, updateNodeInternals]);
 
   const handleTextChange = (e) => {
     setCurrText(e.target.value);
